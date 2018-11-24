@@ -7,10 +7,19 @@ include 'config.php';
 
 <!doctype html>
 <html class="no-js" lang="en">
+<style >
+img
+{
+background-image:url('/home/puneeth/Downloads/alt.png');
+width:400px;
+}
+</style>
+  
+</style>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Books || Book Rental Store</title>
+    <title>Books </title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
   </head>
@@ -19,8 +28,8 @@ include 'config.php';
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="index.php">Book Rental Store</a></h1>
-        </li>`
+          <h1><a href="index.php">Book Rental Service </a></h1>
+        </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
 
@@ -28,9 +37,9 @@ include 'config.php';
       <!-- Right Nav Section -->
         <ul class="right">
           <li><a href="about.php">About</a></li>
-          <li class='active'><a href="products.php">All Books</a></li>
-          <li><a href="cart.php">Cart</a></li>
-          <li><a href="orders.php">Past Orders</a></li>
+          <li class='active'><a href="products.php">Products</a></li>
+          <li><a href="cart.php">View Cart</a></li>
+          <li><a href="orders.php">My Orders</a></li>
           <li><a href="contact.php">Contact</a></li>
           <?php
 
@@ -57,7 +66,7 @@ include 'config.php';
           $product_id = array();
           $product_quantity = array();
 
-          $result = $mysqli->query('SELECT * FROM products');
+          $result = $mysqli->query('SELECT * FROM books');
           if($result === FALSE){
             die(mysql_error());
           }
@@ -67,12 +76,12 @@ include 'config.php';
             while($obj = $result->fetch_object()) {
 
               echo '<div class="large-4 columns">';
-              echo '<p><h3>'.$obj->product_name.'</h3></p>';
-              echo '<img src="images/products/'.$obj->product_img_name.'"/>';
-              echo '<p><strong>Book ID</strong>: '.$obj->product_code.'</p>';
-              echo '<p><strong>Description</strong>: '.$obj->product_desc.'</p>';
-              echo '<p><strong>Units Available</strong>: '.$obj->qty.'</p>';
-              echo '<p><strong>Price (Per Unit)</strong>: '.$currency.$obj->price.'</p>';
+              echo '<p><h3>'.$obj->title.'</h3></p>';
+              echo '<img src="images/products/'.$obj->image.'" />';
+              echo '<p><strong>Price</strong>: '.$obj->price.'</p>';
+              echo '<p><strong>Description</strong>: '.$obj->description.'</p>';
+              echo '<p><strong>Category</strong>: '.$obj->category.'</p>';
+              // echo '<p><strong>Price (Per Unit)</strong>: '.$currency.$obj->price.'</p>';
 
 
 
@@ -103,7 +112,7 @@ include 'config.php';
 
 
         <footer style="margin-top:10px;">
-           <p style="text-align:center; font-size:0.8em;clear:both;">&copy; Book Rental Store. All Rights Reserved.</p>
+           <p style="text-align:center; font-size:0.8em;clear:both;">&copy; BOLT Sports Shop. All Rights Reserved.</p>
         </footer>
 
       </div>

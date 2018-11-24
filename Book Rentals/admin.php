@@ -19,7 +19,7 @@ include 'config.php';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin || BOLT Sports Shop</title>
+    <title>Admin || Book Rental Service</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
   </head>
@@ -28,7 +28,7 @@ include 'config.php';
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="index.php">BOLT Sports Shop</a></h1>
+          <h1><a href="index.php">Book Rental Service</a></h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
@@ -44,6 +44,9 @@ include 'config.php';
           <?php
 
           if(isset($_SESSION['username'])){
+            echo '<li><a href="add.php">Add Books</a></li>';
+            echo '<li><a href="view.php">View Books</a></li>';
+            echo '<li><a href="users_info.php">View Users</a></li>';
             echo '<li><a href="account.php">My Account</a></li>';
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
@@ -75,7 +78,7 @@ include 'config.php';
               echo '<p><strong>New Qty</strong>:</p>';
               echo '</div>';
               echo '<div class="large-6 columns">';
-              echo '<input type="number" name="quantity[]"/>';
+              echo '<input type="number" name="quantity[]" />';
 
               echo '</div>';
               echo '</div>';
@@ -94,7 +97,7 @@ include 'config.php';
         <center><p><input style="clear:both;" type="submit" class="button" value="Update"></p></center>
         </form>
         <footer style="margin-top:10px;">
-           <p style="text-align:center; font-size:0.8em;">&copy; BOLT Sports Shop. All Rights Reserved.</p>
+           <p style="text-align:center; font-size:0.8em;">&copy; Book Rental Service. All Rights Reserved.</p>
         </footer>
 
       </div>

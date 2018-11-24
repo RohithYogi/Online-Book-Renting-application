@@ -44,9 +44,9 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
       <!-- Right Nav Section -->
         <ul class="right">
           <li><a href="about.php">About</a></li>
-          <li><a href="products.php">All Books</a></li>
+          <li><a href="products.php">Books</a></li>
           <li><a href="cart.php">Cart</a></li>
-          <li><a href="orders.php">Past Orders</a></li>
+          <li><a href="orders.php">My Orders</a></li>
           <li><a href="contact.php">Contact</a></li>
           <?php
 
