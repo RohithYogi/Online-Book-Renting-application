@@ -74,6 +74,14 @@ CREATE TABLE IF NOT EXISTS `books` (
 --
 -- Dumping data for table `products`
 --
+INSERT INTO `books` (`id`, `title`, `author`, `edition`, `price`, `category`, `image`,`description`) VALUES
+(1, 'Harry Potter and the Philosophers Stone' , 'J.K Rowling','1','50','adventure','1.png','The first novel in the Harry Potter series and Rowlings debut novel, it follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh birthday, when he receives a letter of acceptance to Hogwarts School of Witchcraft and Wizardry. Harry makes close friends and a few enemies during his first year at the school, and with the help of his friends, Harry faces an attempted comeback by the dark wizard Lord Voldemort, who killed Harrys parents, but failed to kill Harry when he was just 15 months old.'),
+(2, 'Harry Potter and the Chamber of Secrets' , 'J.K Rowling','1','50','adventure','2.png','The plot follows Harrys second year at Hogwarts School of Witchcraft and Wizardry, during which a series of messages on the walls of the schools corridors warn that the "Chamber of Secrets" has been opened and that the "heir of Slytherin" would kill all pupils who do not come from all-magical families. These threats are found after attacks which leave residents of the school petrified. Throughout the year, Harry and his friends Ron and Hermione investigate the attacks.'),
+(3, 'Harry Potter and the Prisoner of Azkaban' , 'J.K Rowling','1','50','adventure','3.png',' The book follows Harry Potter, a young wizard, in his third year at Hogwarts School of Witchcraft and Wizardry. Along with friends Ronald Weasley and Hermione Granger, Harry investigates Sirius Black, an escaped prisoner from Azkaban who they believe is one of Lord Voldemorts old allies. '),
+(4, 'Harry Potter and the Goblet of Fire' , 'J.K Rowling','1','50','adventure','4.jpg','It follows Harry Potter, a wizard in his fourth year at Hogwarts School of Witchcraft and Wizardry and the mystery surrounding the entry of Harrys name into the Triwizard Tournament, in which he is forced to compete. '),
+(5, 'Harry Potter and the Order of the Phoenix' , 'J.K Rowling','1','50','adventure','5.png','The fifth novel in the Harry Potter series. It follows Harry Potters struggles through his fifth year at Hogwarts School of Witchcraft and Wizardry, including the surreptitious return of the antagonist Lord Voldemort, O.W.L. exams, and an obstructive Ministry of Magic. The novel was published on 21 June 2003 by Bloomsbury in the United Kingdom, Scholastic in the United States, and Raincoast in Canada. Five million copies were sold in the first 24 hours of publication.[1] It is the longest book of the series.'),
+(6, 'Harry Potter and the Half-Blood Prince' , 'J.K Rowling','1','50','adventure','6.png','The sixth and penultimate novel in the Harry Potter series. Set during protagonist Harry Potters sixth year at Hogwarts, the novel explores the past of Harrys nemesis, Lord Voldemort, and Harrys preparations for the final battle against Voldemort alongside his headmaster and mentor Albus Dumbledore. ');
+
 
 INSERT INTO `products` (`id`, `product_code`, `product_name`, `product_desc`, `product_img_name`, `qty`, `price`) VALUES
 (1, 'BOLT1', 'Sports Shoes', 'With a clean vamp, tonal stitch details throughout, and a unique formstripe finish, the all new sports shoes fits the needs of multiple running consumers by offering an athletic and a lifestyle look.', 'sports_shoes.jpg', 26, 5000.00),
@@ -103,9 +111,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Dumping data for table `users`
 --
-
-INSERT INTO `users` (`id`, `fname`, `lname`, `address`, `city`, `pin`, `email`, `password`, `type`) VALUES
-(1, 'admin', 'rohith', 'Infinite', 'California', 95014, 'admin@admin.com', 'admin', 'admin'),
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
