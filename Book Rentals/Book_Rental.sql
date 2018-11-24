@@ -75,15 +75,6 @@ CREATE TABLE IF NOT EXISTS `books` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `books` (`id`, `title`,`author`,`edition`, `price`, `category`, `image`, `description`) VALUES
-(1, 'Levis Jeans','siddu', 1,'29.99', 'comics', '../ecommerce/images/products/men4.png', 'These jeans are amazing. They are super comfy and sexy! Buy them.'),
-(2, 'Beautiful Shirt','puneeth',2, '19.99', 'fiction', '../ecommerce/images/products/men1.png', 'What a beautiful blue colored polo-shirt.'),
-(3, 'Generic Shirt','rohith',4, '20.00', 'horror', '../ecommerce/images/products/fbc3afb68d2b1f3203f3c1056879d2d5.png', 'This is a generic polo shirt for boys.');
-
---
--- Dumping data for table `products`
---
-
 INSERT INTO `products` (`id`, `product_code`, `product_name`, `product_desc`, `product_img_name`, `qty`, `price`) VALUES
 (1, 'BOLT1', 'Sports Shoes', 'With a clean vamp, tonal stitch details throughout, and a unique formstripe finish, the all new sports shoes fits the needs of multiple running consumers by offering an athletic and a lifestyle look.', 'sports_shoes.jpg', 26, 5000.00),
 (2, 'BOLT2', 'Cap', 'A sleek, tonal stitched cap for runners. The plain texture and unique design will help runners to concentrate more on running and less on their hair. The combbination of casual and formal look is just brilliant.', 'cap.jpg', 7, 200.00),
@@ -114,8 +105,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `address`, `city`, `pin`, `email`, `password`, `type`) VALUES
-(1, 'Steve', 'Jobs', 'Infinite Loop', 'California', 95014, 'sjobs@apple.com', 'steve', 'user'),
-(2, 'srujan', 'swaroop', 'blr', 'bengaluru', 101010, 'srujan@gmail.com', 'srujan', 'admin');
+(1, 'admin', 'rohith', 'Infinite', 'California', 95014, 'admin@admin.com', 'admin', 'admin'),
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

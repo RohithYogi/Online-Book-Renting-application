@@ -7,28 +7,29 @@ include 'config.php';
 
 <!doctype html>
 <html class="no-js" lang="en">
-<style >
-img
-{
-background-image:url('/home/puneeth/Downloads/alt.png');
-width:400px;
-}
-</style>
-  
-</style>
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Books </title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
+    <style >
+    body{
+        background-image:url("images/blur-book-shelf-landscape.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: top; 
+        background-size: 1920px 1080px;
+      }
+</style>
   </head>
   <body>
 
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="index.php">Book Rental Service </a></h1>
+          <h1><a href="index.php">Book Rental Store</a></h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
@@ -37,8 +38,8 @@ width:400px;
       <!-- Right Nav Section -->
         <ul class="right">
           <li><a href="about.php">About</a></li>
-          <li class='active'><a href="products.php">Products</a></li>
-          <li><a href="cart.php">View Cart</a></li>
+          <li class='active'><a href="products.php">Books</a></li>
+          <li><a href="cart.php">Cart</a></li>
           <li><a href="orders.php">My Orders</a></li>
           <li><a href="contact.php">Contact</a></li>
           <?php
@@ -59,7 +60,7 @@ width:400px;
 
 
 
-    <div class="row" style="margin-top:10px;">
+    <div class="row" style="margin-top:20px;">
       <div class="small-12">
         <?php
           $i=0;
@@ -76,21 +77,21 @@ width:400px;
             while($obj = $result->fetch_object()) {
 
               echo '<div class="large-4 columns">';
-              echo '<p><h3>'.$obj->title.'</h3></p>';
+              echo '<p><h3 style="color: #FFFFFF">'.$obj->title.'</h3></p>';
               echo '<img src="images/products/'.$obj->image.'" />';
-              echo '<p><strong>Price</strong>: '.$obj->price.'</p>';
-              echo '<p><strong>Description</strong>: '.$obj->description.'</p>';
-              echo '<p><strong>Category</strong>: '.$obj->category.'</p>';
+              echo '<p style="color: #FFFFFF"><strong>Price</strong>: '.$obj->price.'</p>';
+              echo '<p style="color: #FFFFFF"><strong>Description</strong>: '.$obj->description.'</p>';
+              echo '<p style="color: #FFFFFF"><strong>Category</strong>: '.$obj->category.'</p>';
               // echo '<p><strong>Price (Per Unit)</strong>: '.$currency.$obj->price.'</p>';
 
 
 
-              if($obj->qty > 0){
-                echo '<p><a href="update-cart.php?action=add&id='.$obj->id.'"><input type="submit" value="Add To Cart" style="clear:both; background: #0078A0; border: none; color: #fff; font-size: 1em; padding: 10px;" /></a></p>';
-              }
-              else {
-                echo 'Out Of Stock!';
-              }
+              // if($obj->qty > 0){
+              //   echo '<p><a href="update-cart.php?action=add&id='.$obj->id.'"><input type="submit" value="Add To Cart" style="clear:both; background: #0078A0; border: none; color: #fff; font-size: 1em; padding: 10px;" /></a></p>';
+              // }
+              // else {
+              //   echo 'Out Of Stock!';
+              // }
               echo '</div>';
 
               $i++;
@@ -112,7 +113,7 @@ width:400px;
 
 
         <footer style="margin-top:10px;">
-           <p style="text-align:center; font-size:0.8em;clear:both;">&copy; BOLT Sports Shop. All Rights Reserved.</p>
+           <p style="text-align:center; font-size:0.8em;color: #FFFFFF">&copy; BOLT Sports Shop. All Rights Reserved.</p>
         </footer>
 
       </div>
