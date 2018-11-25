@@ -22,6 +22,66 @@ include 'config.php';
         background-position: top; 
         background-size: 1920px 1080px;
       }
+      .sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: green;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+   
+
 </style>
   </head>
   <body>
@@ -75,15 +135,22 @@ include 'config.php';
           if($result){
 
             while($obj = $result->fetch_object()) {
+              echo '<div style="background-color:#CCDADA; margin-top:30px;" class="columns">';
+              echo '<p ><h3 style="color: #000000;text-align:center;"><b>'.$obj->title.'</h3></b></p>';
+              echo '<img src="images/products/'.$obj->image.'". width=250px height=250px align="left" hspace="20" />';
+              echo '<p style="color: #000000;margin-top:10px;"> <strong>Author</strong>: '.$obj->author.'</p>';
+              echo '<p style="color: #000000;margin-top:10px;"> <strong>Description</strong>: <br />'.$obj->description.'</p>';
+              echo '<p style="color: #000000"><strong>Price</strong> : '.$obj->price.'</p>';
+              echo '<p style="color: #000000"><strong>Category</strong> : '.$obj->category.'</p>';
 
-              echo '<div class="large-4 columns">';
-              echo '<p><h3 style="color: #FFFFFF">'.$obj->title.'</h3></p>';
-              echo '<img src="images/products/'.$obj->image.'" />';
-              echo '<p style="color: #FFFFFF"><strong>Price</strong>: '.$obj->price.'</p>';
-              echo '<p style="color: #FFFFFF"><strong>Description</strong>: '.$obj->description.'</p>';
-              echo '<p style="color: #FFFFFF"><strong>Category</strong>: '.$obj->category.'</p>';
-              // echo '<p><strong>Price (Per Unit)</strong>: '.$currency.$obj->price.'</p>';
+              // <form>
+              //    <input type="text" id="number" value="0"/>
+              //    <input type="button" onclick="incrementValue()" value="Increment Value" />
+              // </form>
+               
 
+
+               echo '<p><a href="update-cart.php?action=add&id='.$obj->id.'"><input type="submit" value="Add To Cart" style="clear:both; background: #0078A0; border: none; color: #fff; font-size: 1em; padding: 10px" /></a></p>';
 
 
               // if($obj->qty > 0){
@@ -92,7 +159,8 @@ include 'config.php';
               // else {
               //   echo 'Out Of Stock!';
               // }
-              echo '</div>';
+              echo '<p> <br/><br/><br/></p>';
+              echo '</div> ';
 
               $i++;
             }
@@ -113,7 +181,7 @@ include 'config.php';
 
 
         <footer style="margin-top:10px;">
-           <p style="text-align:center; font-size:0.8em;color: #FFFFFF">&copy; BOLT Sports Shop. All Rights Reserved.</p>
+           <p style="text-align:center; font-size:0.8em;color: #000000">&copy; Book Rentals pvt ltd.</p>
         </footer>
 
       </div>
