@@ -2361,3 +2361,9 @@ if (typeof jQuery === 'undefined') {
   })
 
 }(jQuery);
+
+var capnum=0;
+function add(){
+     capnum++;
+     document.getElementById('count').value = capnum;
+}
