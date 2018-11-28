@@ -64,12 +64,14 @@ include 'config.php';
             $total = 0;
             echo '<table>';
             echo '<tr>';
-            echo '<th>Code</th>';
-            echo '<th>Name</th>';
-            echo '<th>Quantity</th>';
-            echo '<th>Cost</th>';
+            echo '<th>id</th>';
+            echo '<th>title</th>';
+            echo '<th>Price per week</th>';
+            echo '<th>Time duration (in weeks)</th>';
+            echo '<th>Total cost</th>';
+
             echo '</tr>';
-            foreach($_SESSION['cart'] as $product_id => $quantity) {
+            foreach($_SESSION['cart'] as $product_id => $time) {
 
             $result = $mysqli->query("SELECT * FROM books WHERE id = ".$product_id);
 
@@ -77,13 +79,14 @@ include 'config.php';
             if($result){
 
               while($obj = $result->fetch_object()) {
-                $cost = $obj->price * $quantity; //work out the line cost
+                $cost = $obj->price * $time; //work out the line cost
                 $total = $total + $cost; //add to the total cost
 
                 echo '<tr>';
-                echo '<td>'.$obj->product_code.'</td>';
-                echo '<td>'.$obj->product_name.'</td>';
-                echo '<td>'.$quantity.'&nbsp;<a class="button [secondary success alert]" style="padding:5px;" href="update-cart.php?action=add&id='.$product_id.'">+</a>&nbsp;<a class="button alert" style="padding:5px;" href="update-cart.php?action=remove&id='.$product_id.'">-</a></td>';
+                echo '<td>'.$obj->id.'</td>';
+                echo '<td>'.$obj->title.'</td>';
+                echo '<td>'.$obj->price.'</td>';
+                echo '<td>'.$time.'&nbsp;<a class="button [secondary success alert]" style="padding:5px;" href="update-cart.php?action=add&id='.$product_id.'">+</a>&nbsp;<a class="button alert" style="padding:5px;" href="update-cart.php?action=remove&id='.$product_id.'">-</a></td>';
                 echo '<td>'.$cost.'</td>';
                 echo '</tr>';
               }
@@ -94,7 +97,7 @@ include 'config.php';
 
 
           echo '<tr>';
-          echo '<td colspan="3" align="right">Total</td>';
+          echo '<td colspan="3" align="right"><b>Total Amount</b></td>';
           echo '<td>'.$total.'</td>';
           echo '</tr>';
 

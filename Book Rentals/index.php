@@ -3,6 +3,10 @@
 //if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
 if(session_id() == '' || !isset($_SESSION)){session_start();}
 
+if( isset($_SESSION["username"]) && $_SESSION["type"]==="admin") {
+  header("location:admin.php");
+}
+
 ?>
 
 <!doctype html>
@@ -45,12 +49,20 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
         <ul class="right">
           <li><a href="about.php">About</a></li>
           <li><a href="products.php">Books</a></li>
-          <li><a href="cart.php">Cart</a></li>
-          <li><a href="orders.php">My Orders</a></li>
           <li><a href="contact.php">Contact</a></li>
           <?php
 
           if(isset($_SESSION['username'])){
+            
+            if($_SESSION["type"]==="user")
+            {
+              echo '<li><a href="cart.php">Cart</a></li>';
+              echo '<li><a href="orders.php">My Orders</a></li>';
+              echo '<li><a href="donate.php">Donate Book</a></li>';
+              echo '<li><a href="request.php">Request Book</a></li>';
+
+              
+            }
             echo '<li><a href="account.php">My Account</a></li>';
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
@@ -72,8 +84,8 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
     </div> -->
 
     <div id='search-box'>
-    <form action='/search' id='search-form' method='get' target='_top'>
-      <input id='search-text' name='q' placeholder='Search...' type='text'/>
+    <form method="POST" action='products_search.php' id='search-form' >
+      <input id='search-text'  name ="search" placeholder='Search...' type='text'/>
         <button id='search-button' type='submit'>                     
           <span><i class="fa fa-search"></i></span>
         </button>

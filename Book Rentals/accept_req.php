@@ -46,7 +46,7 @@ include 'config.php';
             echo '<li><a href="add.php">Add Books</a></li>';
             echo '<li><a href="req_admin.php">Requested Books</a></li>';
             echo '<li><a href="donate_admin.php">Donated Books</a></li>';
-            echo '<li class="active"><a href="view.php">View Books</a></li>';
+            echo '<li ><a href="view.php">View Books</a></li>';
             echo '<li><a href="users_info.php">View Users</a></li>';
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
@@ -62,8 +62,9 @@ include 'config.php';
     <form method="POST" action="update_books.php" style="margin-top:30px;">
     <?php
   
-        $edit_id = (int)$_GET['edit'];
-        $edit_result = $mysqli->query("SELECT * FROM books WHERE id = '{$edit_id}'");
+        $req_id = (int)$_GET['req'];
+        $mysqli->query("UPDATE books SET type ='admin' WHERE id ='{$req_id}'");
+        $edit_result = $mysqli->query("SELECT * FROM books WHERE id = '{$req_id}'");
         $edit_field = mysqli_fetch_assoc($edit_result);
    
     ?>
@@ -82,7 +83,7 @@ include 'config.php';
               <label for="right-label" class="right inline">Book Title</label>
             </div>
             <div class="small-8 columns">
-              <input type="text" id="right-label" name="book_title" value=<?php echo $edit_field['title']?>>
+              <input type="text" id="right-label" name="book_title" value=<?php echo $edit_field['title']?> readonly>
             </div>
           </div>
           <div class="row">
@@ -90,7 +91,7 @@ include 'config.php';
               <label for="right-label" class="right inline">Author</label>
             </div>
             <div class="small-8 columns">
-              <input type="text" id="right-label" name="author" value=<?php echo $edit_field['author']?>>
+              <input type="text" id="right-label" name="author" value=<?php echo $edit_field['author']?> readonly>
             </div>
           </div>
           <div class="row">
@@ -98,7 +99,7 @@ include 'config.php';
               <label for="right-label" class="right inline">Edition</label>
             </div>
             <div class="small-8 columns">
-            <input type="number" id="right-label"  name="edition" value=<?php echo  $edit_field['edition']?>>
+            <input type="number" id="right-label"  name="edition" value=<?php echo  $edit_field['edition']?> readonly>
             </div>
           </div>
           <div class="row">
@@ -106,7 +107,7 @@ include 'config.php';
               <label for="right-label" class="right inline">Category</label>
             </div>
             <div class="small-8 columns">
-            <input type="text" id="right-label"  name="category" value=<?php echo  $edit_field['category']?>>
+            <input type="text" id="right-label"  name="category" value=<?php echo  $edit_field['category']?> readonly>
             </div>
           </div>
           
@@ -115,7 +116,7 @@ include 'config.php';
               <label for="right-label" class="right inline">Price</label>
             </div>
             <div class="small-8 columns">
-            <input type="number" id="right-label"  name="price" value=<?php echo  $edit_field['price']?>>
+            <input type="number" id="right-label"  name="price" >
             </div>
             
           </div>
@@ -124,7 +125,7 @@ include 'config.php';
               <label for="right-label" class="right inline">Available Units</label>
             </div>
             <div class="small-8 columns">
-            <input type="number" id="right-label"  name="qty" value=<?php echo  $edit_field['qty']?>>
+            <input type="number" id="right-label"  name="qty"  value=1>
             </div>
             
           </div>

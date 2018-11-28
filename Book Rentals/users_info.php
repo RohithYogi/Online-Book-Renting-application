@@ -40,25 +40,23 @@ include 'config.php';
       <section class="top-bar-section">
       <!-- Right Nav Section -->
         <ul class="right">
-          <li><a href="about.php">About</a></li>
-          <li><a href="products.php">Products</a></li>
-          <li><a href="cart.php">View Cart</a></li>
-          <li><a href="orders.php">My Orders</a></li>
-          <li><a href="contact.php">Contact</a></li>
+        <li><a href="about.php">About</a></li>
+          <li><a href="products.php">Books</a></li>
+          <li><a href="orders.php">All Orders</a></li>
           <?php
 
           if(isset($_SESSION['username'])){
-            echo '<li><a href="account.php">My Account</a></li>';
-            echo '<li><a href="logout.php">Log Out</a></li>';
-            echo '<li ><a href="add.php">Add Books</a></li>';
+            
+            echo '<li><a href="add.php">Add Books</a></li>';
+            echo '<li><a href="req_admin.php">Requested Books</a></li>';
+            echo '<li><a href="donate_admin.php">Donated Books</a></li>';
             echo '<li><a href="view.php">View Books</a></li>';
             echo '<li class="active"><a href="users_info.php">View Users</a></li>';
-            
-            
-            
+            echo '<li><a href="logout.php">Log Out</a></li>';
           }
           else{
             echo '<li><a href="login.php">Log In</a></li>';
+            echo '<li><a href="register.php">Register</a></li>';
           }
           //delete function(to remove books)
           if(isset($_GET['delete']) && !empty($_GET['delete'])) {
