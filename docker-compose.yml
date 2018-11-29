@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./Book Rentals/:/var/www/html/
+      - ./software/updated/Book Rentals/:/var/www/html/
     ports:
       - "8100:80"
     stdin_open: true
