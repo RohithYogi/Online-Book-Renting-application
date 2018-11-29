@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       # MYSQL_DATABASE: Book_Rental
     volumes:
-      - /Book Rentals/Book_Rental.sql:/docker-entrypoint-initdb.d/dump.sql
+      - /home/rohith/Desktop/software/updated/Book Rentals/Book_Rental.sql:/docker-entrypoint-initdb.d/dump.sql
     ports:
       - "9906:3306"
   web:
