@@ -29,15 +29,30 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
       <section class="top-bar-section">
       <!-- Right Nav Section -->
         <ul class="right">
-          <li class="active"><a href="about.php">About</a></li>
-          <li><a href="products.php">Products</a></li>
-          <li><a href="cart.php">View Cart</a></li>
-          <li><a href="orders.php">My Orders</a></li>
+           <li class='active'><a href="about.php">About</a></li>
+          <li ><a href="products.php">Books</a></li>
           <li><a href="contact.php">Contact</a></li>
+          
           <?php
-    
           if(isset($_SESSION['username'])){
+           if(($_SESSION['type'])==='admin'){
+            echo '<li><a href="orders.php">All Orders</a></li>';
+            echo '<li><a href="add.php">Add Books</a></li>';
+            echo '<li><a href="req_admin.php">Requested Books</a></li>';
+            echo '<li><a href="donate_admin.php">Donated Books</a></li>';
+            echo '<li ><a href="view.php">View Books</a></li>';
+            echo '<li><a href="users_info.php">View Users</a></li>';
+           
+          }
+          else if(($_SESSION['type'])==='user'){
+            echo '<li><a href="cart.php">Cart</a></li>';
+            echo '<li><a href="orders.php">My Orders</a></li>';
+            echo '<li><a href="donate.php">Donate Book</a></li>';
+              echo '<li><a href="request.php">Request Book</a></li>';
             echo '<li><a href="account.php">My Account</a></li>';
+
+          }
+          
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
           else{
@@ -54,7 +69,7 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
 
     <div class="row" style="margin-top:30px;">
       <div class="small-12">
-        <p>Book Rental Service is a project on E-Commerce Website. All products listed are fake. This project just gives a preview to what a real world implementation of E-Commerce Website will look like. Well if you do like the website then visit
+        <h1>Book Rental Service is a web application,developed our group in the software engineering course under <b> Prof B.Thangaraju sir</b> .</h1></div> </h1>
        
         <footer>
            <p style="text-align:center; font-size:0.8em;">&copy; Book Rental Service. All Rights Reserved.</p>

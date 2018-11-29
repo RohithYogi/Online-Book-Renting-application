@@ -3,6 +3,12 @@
 //if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
 if(session_id() == '' || !isset($_SESSION)){session_start();}
 include 'config.php';
+
+
+ 
+
+
+// header("location:cart.php");
 ?>
 
 <!doctype html>
@@ -14,82 +20,22 @@ include 'config.php';
     <title>Books </title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
-    <style >
-    body{
-        background-image:url("images/blur-book-shelf-landscape.png");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: top; 
-        background-size: 1920px 1080px;
+      </head>
+      <style>
+      body {
+         background-image: url("images/books.jpg");
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-position: top; 
+         background-size: 1920px 1080px;
       }
-      .sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-/* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-  border: none;
-  background: none;
-  width:100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
-}
-
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
-}
-
-/* Main content */
-.main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: green;
-  color: white;
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: #262626;
-  padding-left: 8px;
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
-}
-
-   
-
-</style>
-  </head>
+    </style>
   <body>
 
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="index.php">Book Rental Store</a></h1>
+          <h1><a href="index.php">Book Rental Service</a></h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
@@ -99,13 +45,28 @@ include 'config.php';
         <ul class="right">
           <li><a href="about.php">About</a></li>
           <li class='active'><a href="products.php">Books</a></li>
-          <li><a href="cart.php">Cart</a></li>
-          <li><a href="orders.php">My Orders</a></li>
           <li><a href="contact.php">Contact</a></li>
+          
           <?php
-
           if(isset($_SESSION['username'])){
+           if(($_SESSION['type'])==='admin'){
+            echo '<li><a href="orders.php">All Orders</a></li>';
+            echo '<li><a href="add.php">Add Books</a></li>';
+            echo '<li><a href="req_admin.php">Requested Books</a></li>';
+            echo '<li><a href="donate_admin.php">Donated Books</a></li>';
+            echo '<li ><a href="view.php">View Books</a></li>';
+            echo '<li><a href="users_info.php">View Users</a></li>';
+           
+          }
+          else if(($_SESSION['type'])==='user'){
+            echo '<li><a href="cart.php">Cart</a></li>';
+            echo '<li><a href="orders.php">My Orders</a></li>';
+            echo '<li><a href="donate.php">Donate Book</a></li>';
+              echo '<li><a href="request.php">Request Book</a></li>';
             echo '<li><a href="account.php">My Account</a></li>';
+
+          }
+          
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
           else{
@@ -127,7 +88,7 @@ include 'config.php';
           $product_id = array();
           $product_quantity = array();
 
-          $result = $mysqli->query('SELECT * FROM books');
+          $result = $mysqli->query("SELECT * FROM books where type='admin'");
           if($result === FALSE){
             die(mysql_error());
           }
@@ -141,6 +102,7 @@ include 'config.php';
               echo '<p style="color: #000000;margin-top:10px;"> <strong>Author</strong>: '.$obj->author.'</p>';
               echo '<p style="color: #000000;margin-top:10px;"> <strong>Description</strong>: <br />'.$obj->description.'</p>';
               echo '<p style="color: #000000"><strong>Price</strong> : '.$obj->price.'</p>';
+              echo '<p style="color: #000000"><strong>Available Units</strong> : '.$obj->qty.'</p>';
               echo '<p style="color: #000000"><strong>Category</strong> : '.$obj->category.'</p>';
 
               // <form>
@@ -150,15 +112,16 @@ include 'config.php';
                
 
 
-               echo '<p><a href="update-cart.php?action=add&id='.$obj->id.'"><input type="submit" value="Add To Cart" style="clear:both; background: #0078A0; border: none; color: #fff; font-size: 1em; padding: 10px" /></a></p>';
+               
 
 
-              // if($obj->qty > 0){
-              //   echo '<p><a href="update-cart.php?action=add&id='.$obj->id.'"><input type="submit" value="Add To Cart" style="clear:both; background: #0078A0; border: none; color: #fff; font-size: 1em; padding: 10px;" /></a></p>';
-              // }
-              // else {
-              //   echo 'Out Of Stock!';
-              // }
+              if($obj->qty > 0){
+                echo '<p><a href="update-cart.php?action=add&id='.$obj->id.'"><input type="submit" value="Add To Cart" style="clear:both; background: #0078A0; border: none; color: #fff; font-size: 1em; padding: 10px;" /></a></p>';
+                
+              }
+              else {
+                echo '<p style="color: #000000;"><pre>                                                      <b>OUT OF STOCK!</b> </pre></p>';
+              }
               echo '<p> <br/><br/><br/></p>';
               echo '</div> ';
 

@@ -17,11 +17,23 @@ include 'config.php';
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin || Book Rental Service</title>
+    <title>Book Rental Store</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      body {
+         background-image: url("images/book-shelf-landscape.jpg");
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-position: top; 
+         background-size: 1920px 1080px;
+      }
+    </style>
   </head>
   <body>
 
@@ -37,17 +49,17 @@ include 'config.php';
       <!-- Right Nav Section -->
         <ul class="right">
           <li><a href="about.php">About</a></li>
-          <li><a href="products.php">Products</a></li>
-          <li><a href="cart.php">View Cart</a></li>
-          <li><a href="orders.php">My Orders</a></li>
-          <li><a href="contact.php">Contact</a></li>
+          <li><a href="products.php">Books</a></li>
+          <li><a href="orders.php">All Orders</a></li>
           <?php
 
           if(isset($_SESSION['username'])){
+            
             echo '<li><a href="add.php">Add Books</a></li>';
+            echo '<li><a href="req_admin.php">Requested Books</a></li>';
+            echo '<li><a href="donate_admin.php">Donated Books</a></li>';
             echo '<li><a href="view.php">View Books</a></li>';
             echo '<li><a href="users_info.php">View Users</a></li>';
-            echo '<li><a href="account.php">My Account</a></li>';
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
           else{
@@ -59,45 +71,21 @@ include 'config.php';
       </section>
     </nav>
 
-
-    <div class="row" style="margin-top:10px;">
-      <div class="large-12">
-        <h3>Hey Admin!</h3>
-        <?php
-          $result = $mysqli->query("SELECT * from products order by id asc");
-          if($result) {
-            while($obj = $result->fetch_object()) {
-              echo '<div class="large-4 columns">';
-              echo '<p><h3>'.$obj->product_name.'</h3></p>';
-              echo '<img src="images/products/'.$obj->product_img_name.'"/>';
-              echo '<p><strong>Product Code</strong>: '.$obj->product_code.'</p>';
-              echo '<p><strong>Description</strong>: '.$obj->product_desc.'</p>';
-              echo '<p><strong>Units Available</strong>: '.$obj->qty.'</p>';
-              echo '<div class="large-6 columns" style="padding-left:0;">';
-              echo '<form method="post" name="update-quantity" action="admin-update.php">';
-              echo '<p><strong>New Qty</strong>:</p>';
-              echo '</div>';
-              echo '<div class="large-6 columns">';
-              echo '<input type="number" name="quantity[]" />';
-
-              echo '</div>';
-              echo '</div>';
-            }
-          }
-        ?>
-
-
-
-      </div>
+ <div id='search-box'>
+    <form method="POST" action='products_search.php' id='search-form' >
+      <input id='search-text'  name ="search" placeholder='Search...' type='text'/>
+        <button id='search-button' type='submit'>                     
+          <span><i class="fa fa-search"></i></span>
+        </button>
+      </form>
     </div>
 
 
     <div class="row" style="margin-top:10px;">
       <div class="small-12">
-        <center><p><input style="clear:both;" type="submit" class="button" value="Update"></p></center>
-        </form>
-        <footer style="margin-top:10px;">
-           <p style="text-align:center; font-size:0.8em;">&copy; Book Rental Service. All Rights Reserved.</p>
+
+        <footer style="margin-top:300px;">
+           <p style="text-align:center; font-size:0.8em;color: #FFFFFF">&copy; Book Rental Store. All Rights Reserved.</p>
         </footer>
 
       </div>
@@ -114,3 +102,5 @@ include 'config.php';
     </script>
   </body>
 </html>
+
+

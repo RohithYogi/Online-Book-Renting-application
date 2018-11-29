@@ -7,9 +7,7 @@ if(!isset($_SESSION["username"])) {
     header("location:index.php");
 }
 
-if($_SESSION["type"]!="admin") {
-    header("location:index.php");
-}
+
 
 include 'config.php';
 ?>
@@ -38,16 +36,22 @@ include 'config.php';
         <ul class="right">
         <li><a href="about.php">About</a></li>
           <li><a href="products.php">Books</a></li>
-          <li><a href="orders.php">All Orders</a></li>
+          <li><a href="contact.php">Contact</a></li>
           <?php
 
           if(isset($_SESSION['username'])){
             
-            echo '<li class="active"><a href="add.php">Add Books</a></li>';
-            echo '<li><a href="req_admin.php">Requested Books</a></li>';
-            echo '<li><a href="donate_admin.php">Donated Books</a></li>';
-            echo '<li><a href="view.php">View Books</a></li>';
-            echo '<li><a href="users_info.php">View Users</a></li>';
+            if($_SESSION["type"]==="user")
+            {
+              
+              echo '<li><a href="cart.php">Cart</a></li>';
+              echo '<li><a href="orders.php">My Orders</a></li>';
+              echo '<li><a  href="donate.php">Donate Book</a></li>';
+              echo '<li class ="active"><a href="request.php">Request Book</a></li>';
+              
+              
+            }
+            echo '<li><a href="account.php">My Account</a></li>';
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
           else{
@@ -59,7 +63,8 @@ include 'config.php';
       </section>
     </nav>
 
-    <form method="POST" action="insert_books.php" style="margin-top:30px;">
+    <form method="POST" action="request_books.php" style="margin-top:30px;">
+    <?php $check='request'; ?>
       <div class="row">
         <div class="small-8">
 
@@ -68,7 +73,7 @@ include 'config.php';
               <label for="right-label" class="right inline">Book Title</label>
             </div>
             <div class="small-8 columns">
-              <input type="text" id="right-label" name="book_title" >
+              <input type="text" id="right-label" name="book_title">
             </div>
           </div>
           <div class="row">
@@ -96,29 +101,6 @@ include 'config.php';
             </div>
           </div>
           
-          <div class="row">
-            <div class="small-4 columns">
-              <label for="right-label" class="right inline">Price</label>
-            </div>
-            <div class="small-8 columns">
-              <input type="text" id="right-label"  name="price">
-            </div>
-            
-          </div>
-          <div class="row">
-            <div class="small-4 columns">
-              <label for="right-label" class="right inline">Quantity</label>
-            </div>
-            <div class="small-8 columns">
-              <input type="text" id="right-label"  name="qty">
-            </div>
-            
-          </div>
-           <div class="row">
-           <div class="form-group col-md-6">
-		<label for="photo">Product Photo:</label>
-		<input class="form-control" type="file" name="photo" id="photo">
-	</div>
             <div class="row">
             <div class="form-group col-md-6">
 		<label for="description">Description</label>
@@ -127,7 +109,7 @@ include 'config.php';
             
           </div>
                      <div class="small-8 columns">
-              <input type="submit" id="right-label" value="Add Books" style="background: #0078A0; border: none; color: #fff; font-family: 'Helvetica Neue', sans-serif; font-size: 1em; padding: 10px;">
+              <input type="submit" id="right-label" value="Request" style="background: #0078A0; border: none; color: #fff; font-family: 'Helvetica Neue', sans-serif; font-size: 1em; padding: 10px;">
               <input type="reset" id="right-label" value="Reset" style="background: #0078A0; border: none; color: #fff; font-family: 'Helvetica Neue', sans-serif; font-size: 1em; padding: 10px;">
             </div>
           </div>

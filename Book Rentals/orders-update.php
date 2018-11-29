@@ -8,24 +8,29 @@ if(isset($_SESSION['cart'])) {
 
   $total = 0;
 
-  foreach($_SESSION['cart'] as $product_id => $quantity) {
+  foreach($_SESSION['cart'] as $product_id => $time) {
 
-    $result = $mysqli->query("SELECT * FROM products WHERE id = ".$product_id);
-
+    $result = $mysqli->query("SELECT * FROM books WHERE id = ".$product_id);
+    
     if($result){
 
       if($obj = $result->fetch_object()) {
 
 
-        $cost = $obj->price * $quantity;
+        $cost = $obj->price * $time;
 
         $user = $_SESSION["username"];
 
-        $query = $mysqli->query("INSERT INTO orders (product_code, product_name, product_desc, price, units, total, email) VALUES('$obj->product_code', '$obj->product_name', '$obj->product_desc', $obj->price, $quantity, $cost, '$user')");
+        // $query = $mysqli->query("INSERT INTO orders (product_code, product_name, price,duration, total,status, email) VALUES('$obj->id, '$obj->title',  $obj->price, $time, $cost, '$user')");
+        $query = $mysqli->query("INSERT INTO `orders` ( `product_code`, `product_name`, `price`, `amount`, `duration`,`status`,`email`) VALUES
+        ( $obj->id,'$obj->title' , $obj->price,$cost,$time,'Succesful:will soon dispatch','$user')"); 
+    echo $obj->title;
+    unset($_SESSION['cart']);
+        header("location:success.php");
 
         if($query){
-          $newqty = $obj->qty - $quantity;
-          if($mysqli->query("UPDATE products SET qty = ".$newqty." WHERE id = ".$product_id)){
+          $newqty = $obj->qty - 1;
+          if($mysqli->query("UPDATE books SET qty = ".$newqty." WHERE id = ".$product_id)){
 
           }
         }
@@ -58,14 +63,14 @@ if(isset($_SESSION['cart'])) {
           }
         }*/
 
-
+        
 
       }
     }
+
   }
 }
 
-unset($_SESSION['cart']);
-header("location:success.php");
+
 
 ?>

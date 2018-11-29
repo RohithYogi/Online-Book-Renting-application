@@ -16,15 +16,11 @@ include 'config.php';
 
 <!doctype html>
 <html class="no-js" lang="en">
-<style> .button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
-</style>
-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register || Book Rental Service</title>
     <link rel="stylesheet" href="css/foundation.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css">
     <script src="js/vendor/modernizr.js"></script>
   </head>
   <body>
@@ -42,7 +38,7 @@ include 'config.php';
         <ul class="right">
         <li><a href="about.php">About</a></li>
           <li><a href="products.php">Books</a></li>
-          <li><a href="orders.php">All Orders</a></li>
+          <li class="active"><a href="orders.php">All Orders</a></li>
           <?php
 
           if(isset($_SESSION['username'])){
@@ -50,7 +46,7 @@ include 'config.php';
             echo '<li><a href="add.php">Add Books</a></li>';
             echo '<li><a href="req_admin.php">Requested Books</a></li>';
             echo '<li><a href="donate_admin.php">Donated Books</a></li>';
-            echo '<li class="active"><a href="view.php">View Books</a></li>';
+            echo '<li ><a href="view.php">View Books</a></li>';
             echo '<li><a href="users_info.php">View Users</a></li>';
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
@@ -58,52 +54,70 @@ include 'config.php';
             echo '<li><a href="login.php">Log In</a></li>';
             echo '<li><a href="register.php">Register</a></li>';
           }
-          //delete function(to remove books)
-          if(isset($_GET['delete']) && !empty($_GET['delete'])) {
-              $delete_id = (int)$_GET['delete'];
-              $mysqli->query("DELETE FROM books WHERE id = '{$delete_id}'");
-              header("Location: view.php");
-          }
           ?>
         </ul>
       </section>
     </nav>
 
-    <div class="col-md-6">
+    <form method="POST" action="update_order_admin.php" style="margin-top:30px;">
+    <?php
+  
+        $edit_id = (int)$_GET['edit'];
+        $edit_result = $mysqli->query("SELECT * FROM orders WHERE id = '{$edit_id}'");
+        $edit_field = mysqli_fetch_assoc($edit_result);
+   
+    ?>
+       <div class="col-md-6">
 		<table class="table table-bordered table-condensed">
 			<thead>
-				<th>Book_Title</th>
-				<th>Author</th>
-				<th>Edition</th>
-			   <th>Category</th>
-			    <th>Price</th>
-          <th>Available Units</th>
-			    <th>Description</th>
+				<th>Order ID</th>
+				<th>Date of Purchase</th>
+				<th>Product Code</th>
+			   <th>Book title</th>
+			    <th>Price Per Week</th>
+          <th>Duration(in weeks)</th>
+          <th>Status</th>
+
 				<th></th>
 			</thead>
 			<tbody>
-				<?php $result = $mysqli->query("SELECT * FROM books where type='admin'"); ?>
-				<?php while($books_table = mysqli_fetch_assoc($result)) : ?>
 				<tr class="bg-primary">
-					<td><?php echo $books_table['title']; ?></td>
-				    <td><?php echo $books_table['author']; ?></td>
-					<td><?php echo $books_table['edition']; ?></td>
-				    <td><?php echo $books_table['category']; ?></td>
-					<td><?php echo $books_table['price']; ?></td>
-          <td><?php echo $books_table['qty']; ?></td>
-					<td><?php echo $books_table['description']; ?></td>
-				    <td>
-						<a class ="button4" href="edit.php?edit=<?php echo $books_table['id'];?>"><i class="fa fa-edit"></i>Edit/</a>
-                        <a class ="button4" href="view.php?delete=<?php echo $books_table['id']; ?>"><i class="fa fa-close"></i>Remove</a>
-					</td>
+					<td><input type="number" id="right-label"  name="id" value=<?php echo  $edit_field['id']?> readonly></td>
+				    <td><?php echo $edit_field['date']; ?></td>
+					<td><?php echo $edit_field['product_code']; ?></td>
+				    <td><?php echo $edit_field['product_name']; ?></td>
+					<td><?php echo $edit_field['price']; ?></td>
+          <td><input type="number" id="right-label"  name="time" value=<?php echo  $edit_field['duration']?>></td>
+          <td><textarea class="form-control" name="status" id="description" rows="4" ><?php echo  $edit_field['status']?></textarea>
+</td>
+
+				  
 					
 				
 				</tr>
 					
-				<?php endwhile; ?>
 			</tbody>
 		</table>
 	</div>	
+     
+                     <div class="small-8 columns">
+              <input type="submit" id="right-label" value="Update" style="background: #0078A0; border: none; color: #fff; font-family: 'Helvetica Neue', sans-serif; font-size: 1em; padding: 10px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="row" style="margin-top:10px;">
+      <div class="small-12">
+
+        <footer>
+           <p style="text-align:center; font-size:0.8em;">&copy; Book Rental Service. All Rights Reserved.</p>
+        </footer>
+
+      </div>
+    </div>
 
 
 

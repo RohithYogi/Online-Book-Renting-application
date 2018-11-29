@@ -12,7 +12,7 @@ $action = $_GET['action'];
 if($action === 'empty')
   unset($_SESSION['cart']);
 
-$result = $mysqli->query("SELECT qty FROM products WHERE id = ".$product_id);
+$result = $mysqli->query("SELECT qty FROM books WHERE id = ".$product_id);
 
 
 if($result){
@@ -22,7 +22,7 @@ if($result){
     switch($action) {
 
       case "add":
-      if($_SESSION['cart'][$product_id]+1 <= $obj->qty)
+      if($_SESSION['cart'][$product_id]+1 <= 12)
         $_SESSION['cart'][$product_id]++;
       break;
 

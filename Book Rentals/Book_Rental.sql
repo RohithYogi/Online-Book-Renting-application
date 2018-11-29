@@ -31,17 +31,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(15) NOT NULL auto_increment,
-  `product_code` varchar(255) NOT NULL,
+  `product_code` int NOT NULL,
   `product_name` varchar(255) NOT NULL,
-  `product_desc` varchar(255) NOT NULL,
   `price` int(10) NOT NULL,
-  `units` int(5) NOT NULL,
-  `total` int(15) NOT NULL,
-  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `amount` int(15) NOT NULL,
+  `date` timestamp  default CURRENT_TIMESTAMP,
+  `duration` int,
+  `status`  text,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
+INSERT INTO `orders` (`id`, `product_code`, `product_name`, `price`, `amount`, `duration`,`status`,`email`) VALUES
+(1, 2,'Harry Potter and the Philosophers Stone' , 50,350,15,'delivered','admin@gmail.com');
 
 --
 -- Table structure for table `products`
@@ -65,9 +67,11 @@ CREATE TABLE IF NOT EXISTS `books` (
   `author` varchar(255) ,
   `edition` int  ,
   `price` int  ,
+  `qty`  int,
   `category` varchar(255)  ,
   `image` varchar(255) ,
   `description` text ,
+  `type` varchar(200) default 'admin', 
     PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ;
 
@@ -106,8 +110,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `type` varchar(20) NOT NULL default 'user',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+INSERT INTO `users` (`id`, `fname`, `lname`, `address`, `city`, `pin`, `email`, `password`, `type`) VALUES
+(1, 'Admin', 'Webmaster', 'Internet', 'Electricity', 101010, 'admin@admin.com', 'admin', 'admin');
 --
 -- Dumping data for table `users`
 --

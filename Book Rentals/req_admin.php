@@ -48,9 +48,9 @@ include 'config.php';
           if(isset($_SESSION['username'])){
             
             echo '<li><a href="add.php">Add Books</a></li>';
-            echo '<li><a href="req_admin.php">Requested Books</a></li>';
+            echo '<li class ="active"><a href="req_admin.php">Requested Books</a></li>';
             echo '<li><a href="donate_admin.php">Donated Books</a></li>';
-            echo '<li class="active"><a href="view.php">View Books</a></li>';
+            echo '<li><a href="view.php">View Books</a></li>';
             echo '<li><a href="users_info.php">View Users</a></li>';
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
@@ -76,25 +76,21 @@ include 'config.php';
 				<th>Author</th>
 				<th>Edition</th>
 			   <th>Category</th>
-			    <th>Price</th>
-          <th>Available Units</th>
 			    <th>Description</th>
 				<th></th>
 			</thead>
 			<tbody>
-				<?php $result = $mysqli->query("SELECT * FROM books where type='admin'"); ?>
+				<?php $result = $mysqli->query("SELECT * FROM books where type='request'"); ?>
 				<?php while($books_table = mysqli_fetch_assoc($result)) : ?>
 				<tr class="bg-primary">
 					<td><?php echo $books_table['title']; ?></td>
 				    <td><?php echo $books_table['author']; ?></td>
 					<td><?php echo $books_table['edition']; ?></td>
 				    <td><?php echo $books_table['category']; ?></td>
-					<td><?php echo $books_table['price']; ?></td>
-          <td><?php echo $books_table['qty']; ?></td>
 					<td><?php echo $books_table['description']; ?></td>
 				    <td>
-						<a class ="button4" href="edit.php?edit=<?php echo $books_table['id'];?>"><i class="fa fa-edit"></i>Edit/</a>
-                        <a class ="button4" href="view.php?delete=<?php echo $books_table['id']; ?>"><i class="fa fa-close"></i>Remove</a>
+						<a class ="button4" href="accept_req.php?req=<?php echo $books_table['id'];?>"><i class="fa fa-edit"></i>Accept Request/</a>
+                        <a class ="button4" href="req_admin.php?delete=<?php echo $books_table['id']; ?>"><i class="fa fa-close"></i>Remove</a>
 					</td>
 					
 				

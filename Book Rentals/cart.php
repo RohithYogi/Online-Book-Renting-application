@@ -30,15 +30,30 @@ include 'config.php';
       <section class="top-bar-section">
       <!-- Right Nav Section -->
         <ul class="right">
-          <li><a href="about.php">About</a></li>
-          <li><a href="products.php">Products</a></li>
-          <li class="active"><a href="cart.php">View Cart</a></li>
-          <li><a href="orders.php">My Orders</a></li>
+           <li><a href="about.php">About</a></li>
+          <li><a href="products.php">Books</a></li>
           <li><a href="contact.php">Contact</a></li>
+          
           <?php
-
           if(isset($_SESSION['username'])){
+           if(($_SESSION['type'])==='admin'){
+            echo '<li><a href="orders.php">All Orders</a></li>';
+            echo '<li><a href="add.php">Add Books</a></li>';
+            echo '<li><a href="req_admin.php">Requested Books</a></li>';
+            echo '<li><a href="donate_admin.php">Donated Books</a></li>';
+            echo '<li ><a href="view.php">View Books</a></li>';
+            echo '<li><a href="users_info.php">View Users</a></li>';
+           
+          }
+          else if(($_SESSION['type'])==='user'){
+            echo '<li  class="active" ><a href="cart.php">Cart</a></li>';
+            echo '<li><a href="orders.php">My Orders</a></li>';
+            echo '<li><a href="donate.php">Donate Book</a></li>';
+              echo '<li><a href="request.php">Request Book</a></li>';
             echo '<li><a href="account.php">My Account</a></li>';
+
+          }
+          
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
           else{
@@ -64,12 +79,14 @@ include 'config.php';
             $total = 0;
             echo '<table>';
             echo '<tr>';
-            echo '<th>Code</th>';
-            echo '<th>Name</th>';
-            echo '<th>Quantity</th>';
-            echo '<th>Cost</th>';
+            echo '<th>id</th>';
+            echo '<th>title</th>';
+            echo '<th>Price per week</th>';
+            echo '<th>Time duration (in weeks)</th>';
+            echo '<th>Total cost</th>';
+
             echo '</tr>';
-            foreach($_SESSION['cart'] as $product_id => $quantity) {
+            foreach($_SESSION['cart'] as $product_id => $time) {
 
             $result = $mysqli->query("SELECT * FROM books WHERE id = ".$product_id);
 
@@ -77,13 +94,14 @@ include 'config.php';
             if($result){
 
               while($obj = $result->fetch_object()) {
-                $cost = $obj->price * $quantity; //work out the line cost
+                $cost = $obj->price * $time; //work out the line cost
                 $total = $total + $cost; //add to the total cost
 
                 echo '<tr>';
-                echo '<td>'.$obj->product_code.'</td>';
-                echo '<td>'.$obj->product_name.'</td>';
-                echo '<td>'.$quantity.'&nbsp;<a class="button [secondary success alert]" style="padding:5px;" href="update-cart.php?action=add&id='.$product_id.'">+</a>&nbsp;<a class="button alert" style="padding:5px;" href="update-cart.php?action=remove&id='.$product_id.'">-</a></td>';
+                echo '<td>'.$obj->id.'</td>';
+                echo '<td>'.$obj->title.'</td>';
+                echo '<td>'.$obj->price.'</td>';
+                echo '<td>'.$time.'&nbsp;<a class="button [secondary success alert]" style="padding:5px;" href="update-cart.php?action=add&id='.$product_id.'">+</a>&nbsp;<a class="button alert" style="padding:5px;" href="update-cart.php?action=remove&id='.$product_id.'">-</a></td>';
                 echo '<td>'.$cost.'</td>';
                 echo '</tr>';
               }
@@ -94,7 +112,7 @@ include 'config.php';
 
 
           echo '<tr>';
-          echo '<td colspan="3" align="right">Total</td>';
+          echo '<td colspan="3" align="right"><b>Total Amount</b></td>';
           echo '<td>'.$total.'</td>';
           echo '</tr>';
 

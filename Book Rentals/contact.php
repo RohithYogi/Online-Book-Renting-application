@@ -27,15 +27,30 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
       <section class="top-bar-section">
       <!-- Right Nav Section -->
         <ul class="right">
-          <li><a href="about.php">About</a></li>
-          <li><a href="products.php">Products</a></li>
-          <li><a href="cart.php">View Cart</a></li>
-          <li><a href="orders.php">My Orders</a></li>
-          <li class="active"><a href="contact.php">Contact</a></li>
+           <li><a href="about.php">About</a></li>
+          <li><a href="products.php">Books</a></li>
+          <li class='active'><a href="contact.php">Contact</a></li>
+          
           <?php
-
           if(isset($_SESSION['username'])){
+           if(($_SESSION['type'])==='admin'){
+            echo '<li><a href="orders.php">All Orders</a></li>';
+            echo '<li><a href="add.php">Add Books</a></li>';
+            echo '<li><a href="req_admin.php">Requested Books</a></li>';
+            echo '<li><a href="donate_admin.php">Donated Books</a></li>';
+            echo '<li ><a href="view.php">View Books</a></li>';
+            echo '<li><a href="users_info.php">View Users</a></li>';
+           
+          }
+          else if(($_SESSION['type'])==='user'){
+            echo '<li><a href="cart.php">Cart</a></li>';
+            echo '<li><a href="orders.php">My Orders</a></li>';
+            echo '<li><a href="donate.php">Donate Book</a></li>';
+              echo '<li><a href="request.php">Request Book</a></li>';
             echo '<li><a href="account.php">My Account</a></li>';
+
+          }
+          
             echo '<li><a href="logout.php">Log Out</a></li>';
           }
           else{
@@ -53,7 +68,14 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
     <div class="row" style="margin-top:30px;">
       <div class="small-12">
 
-        <p><a> imtech2016@iiitb.org </a></p>
+        <h1>Software Engineering Project</h1>
+        <h2>International Institute of Information Technology, Bangalore</h2>
+        <p>Contact the authors through GitHub</p>
+        <p><a href="https://github.com/RohithYogi">Rohith Yogi</a></p>
+        <p><a href="https://github.com/Siddarth5199">Siddarth Reddy</a></p>
+        <p><a href="https://github.com/k-puneeth">Srujan Swaroop</a></p>
+        <p><a href="https://github.com/Srujan-Swaroop">Puneeth</a></p>
+
 
         <footer>
            <p style="text-align:center; font-size:0.8em;">&copy; Book Rental Service. All Rights Reserved.</p>
