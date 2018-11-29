@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       # MYSQL_DATABASE: Book_Rental
     volumes:
-      - /home/puneeth/Desktop/sepro1/Book_Rental.sql:/docker-entrypoint-initdb.d/dump.sql
+      - /home/rohith/Desktop/software/Online-Book-Renting-application-siddu/Book Rentals/Book_Rental.sql:/docker-entrypoint-initdb.d/dump.sql
     ports:
       - "9906:3306"
   web:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./sepro1/:/var/www/html/
+      - ./Book Rentals/:/var/www/html/
     ports:
       - "8100:80"
     stdin_open: true
