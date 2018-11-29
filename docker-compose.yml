@@ -1,0 +1,26 @@
+# ./docker-compose.yml
+
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:  
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: rootpassword
+      # MYSQL_DATABASE: Book_Rental
+    volumes:
+      - /home/puneeth/Desktop/sepro1/Book_Rental.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - "9906:3306"
+  web:
+    build: .
+    container_name: php_web
+    depends_on:
+      - db
+    volumes:
+      - ./sepro1/:/var/www/html/
+    ports:
+      - "8100:80"
+    stdin_open: true
+    tty: true
