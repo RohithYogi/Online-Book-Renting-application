@@ -26,7 +26,7 @@ input, button {
   overflow: hidden;
   position: relative;
   width: 1800px;
-  height: 937px;
+  height: 850px;
   margin: 0px auto 0px;
   background: #fff;
 }
@@ -172,9 +172,6 @@ button {
   align-items: center;
   width: 100%;
   height: 100%;
-  transition: -webkit-transform 1.2s;
-  transition: transform 1.2s;
-  transition: transform 1.2s, -webkit-transform 1.2s;
 }
 .img__btn span.m--in {
   -webkit-transform: translateY(-72px);
@@ -192,6 +189,13 @@ button {
 h2 {
   width: 100%;
   font-size: 36px;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+h1 {
+  width: 100%;
+  font-size: 46px;
   color: #FFFFFF;
   text-align: center;
 }
@@ -259,5 +263,6 @@ input {
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
+
 
 
